@@ -1,0 +1,200 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "common": {
+      "root": "apps/common/",
+      "sourceRoot": "apps/common/src",
+      "projectType": "application",
+      "prefix": "omnichannel2",
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "style": "sass"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/common",
+            "index": "apps/common/src/index.html",
+            "main": "apps/common/src/main.ts",
+            "polyfills": "apps/common/src/polyfills.ts",
+            "tsConfig": "apps/common/tsconfig.app.json",
+            "assets": ["apps/common/src/favicon.ico", "apps/common/src/assets"],
+            "styles": ["apps/common/src/styles.scss"],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/common/src/environments/environment.ts",
+                  "with": "apps/common/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "common:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "common:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "common:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/common/tsconfig.app.json",
+              "apps/common/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "apps/common/jest.config.js",
+            "tsConfig": "apps/common/tsconfig.spec.json",
+            "setupFile": "apps/common/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "common-e2e": {
+      "root": "apps/common-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/builders:cypress",
+          "options": {
+            "cypressConfig": "apps/common-e2e/cypress.json",
+            "tsConfig": "apps/common-e2e/tsconfig.e2e.json",
+            "devServerTarget": "common:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "common:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/common-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "mylib": {
+      "root": "libs/mylib",
+      "sourceRoot": "libs/mylib/src",
+      "projectType": "library",
+      "prefix": "omnichannel2",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/mylib/tsconfig.lib.json",
+              "libs/mylib/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/mylib/jest.config.js",
+            "tsConfig": "libs/mylib/tsconfig.spec.json"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "sass"
+        }
+      }
+    },
+    "mylib-two": {
+      "root": "libs/mylib-two",
+      "sourceRoot": "libs/mylib-two/src",
+      "projectType": "library",
+      "prefix": "omnichannel2",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/mylib-two/tsconfig.lib.json",
+              "libs/mylib-two/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/mylib-two/jest.config.js",
+            "tsConfig": "libs/mylib-two/tsconfig.spec.json",
+            "setupFile": "libs/mylib-two/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "sass"
+        }
+      }
+    }
+  },
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "defaultCollection": "@nrwl/schematics"
+  },
+  "schematics": {
+    "@nrwl/schematics:application": {
+      "style": "sass",
+      "framework": "angular"
+    },
+    "@nrwl/schematics:library": {
+      "style": "sass"
+    }
+  },
+  "defaultProject": "common"
+}

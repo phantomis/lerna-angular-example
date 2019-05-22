@@ -1,0 +1,18 @@
+{
+  "$schema": "../../node_modules/ng-packagr/package.schema.json",
+  "name": "@common/mylib-two",
+  "version": "0.0.0",
+  "main": "bundles/common-mylib-two.umd.js",
+  "module": "fesm5/common-mylib-two.js",
+  "es2015": "fesm2015/common-mylib-two.js",
+  "esm5": "esm5/common-mylib-two.js",
+  "esm2015": "esm2015/common-mylib-two.js",
+  "fesm5": "fesm5/common-mylib-two.js",
+  "fesm2015": "fesm2015/common-mylib-two.js",
+  "typings": "common-mylib-two.d.ts",
+  "metadata": "common-mylib-two.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
+  }
+}

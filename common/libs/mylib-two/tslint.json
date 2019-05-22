@@ -1,0 +1,7 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [true, "attribute", "omnichannel2", "camelCase"],
+    "component-selector": [true, "element", "omnichannel2", "kebab-case"]
+  }
+}
